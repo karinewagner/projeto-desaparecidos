@@ -1,14 +1,17 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { MissingPersonsService } from '../../services/missing-persons.service';
+import { MissingPersonsService } from '@services/missing-persons.service';
 
-import { IContent } from '../../services/missing-person.interface';
+import { IContent } from '@services/missing-person.interface';
 
 import { MatCardModule } from '@angular/material/card';
-import { MatButton } from '@angular/material/button';
+import { CardComponent } from '@modules/home/components/card/card.component';
+import {
+  SearchFormComponent
+} from '@modules/home/components/search-form/search-form.component';
 
 @Component({
   selector: 'home-component',
-  imports: [MatCardModule, MatButton],
+  imports: [MatCardModule, CardComponent, SearchFormComponent],
   templateUrl: './home.component.html',
 })
 

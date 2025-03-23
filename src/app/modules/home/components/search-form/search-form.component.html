@@ -1,0 +1,64 @@
+<form
+  [formGroup]="form"
+  class="flex flex-row justify-around items-center bg-gray-100"
+>
+  <mat-form-field appearance="outline">
+    <mat-label>Nome</mat-label>
+    <input matInput formControlName="nome" type="text" placeholder="Nome">
+  </mat-form-field>
+  <div>
+    <p>Faixa Etária</p>
+    <div class="flex gap-3">
+      <mat-form-field appearance="outline">
+        <mat-label>Mínima</mat-label>
+        <input
+          matInput
+          formControlName="faixaIdadeInicial"
+          type="number"
+          min="0"
+          max="99"
+          placeholder="Idade mínima"
+        >
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Máxima</mat-label>
+        <input
+          matInput
+          formControlName="faixaIdadeFinal"
+          type="number"
+          min="0"
+          max="99"
+          placeholder="Idade máxima"
+        >
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="flex flex-row">
+    <label>Sexo: </label>
+    <mat-radio-group formControlName="sexo" class="flex flex-col">
+      <mat-radio-button value="MASCULINO">Masculino</mat-radio-button>
+      <mat-radio-button value="FEMININO">Feminino</mat-radio-button>
+    </mat-radio-group>
+  </div>
+  <div class="flex flex-row">
+    <label>Status: </label>
+    <mat-radio-group formControlName="status" class="flex flex-col">
+      <mat-radio-button value="DESAPARECIDO">Desaparecido</mat-radio-button>
+      <mat-radio-button value="LOCALIZADO">Localizado</mat-radio-button>
+    </mat-radio-group>
+  </div>
+  <div class="flex gap-3">
+    <button mat-raised-button>
+      <mat-icon>close</mat-icon>
+      Limpar
+    </button>
+    <button mat-flat-button>
+      <mat-icon>search</mat-icon>
+      Buscar
+    </button>
+  </div>
+</form>
+
+<pre>
+  {{ form.value | json }}
+</pre>
