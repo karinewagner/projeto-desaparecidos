@@ -1,0 +1,50 @@
+<div class="w-full max-w-7xl mx-auto mt-5">
+  <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+    @for (missingPerson of missingPersonListAll; track missingPerson.id) {
+      <mat-card appearance="outlined">
+        @if (missingPerson.urlFoto) {
+          <img
+            mat-card-image
+            [src]="missingPerson.urlFoto"
+            alt="Foto da pessoa desaparecida"
+            class="object-cover h-60"
+          >
+        } @else {
+          <img
+            mat-card-image
+            src="/assets/img/unidentified-person.jpg"
+            alt="Foto da pessoa"
+            class="object-cover h-60"
+          >
+        }
+        <mat-card-content>
+          <p class="font-semibold">
+            Nome: <span class="font-normal">{{ missingPerson?.nome }}</span>
+          </p>
+          <p class="font-semibold">
+            Idade: <span class="font-normal">{{ missingPerson?.idade }}
+            anos</span>
+          </p>
+          <p class="font-semibold">
+            Sexo: <span class="font-normal">{{ missingPerson?.sexo }}</span>
+          </p>
+          <p class="font-semibold">
+            Data:
+            <span class="font-normal">
+              {{ missingPerson?.ultimaOcorrencia?.dtDesaparecimento }}
+            </span>
+          </p>
+          <p class="font-semibold">
+            Local:
+            <span class="font-normal">
+          {{ missingPerson?.ultimaOcorrencia?.localDesaparecimentoConcat }}
+        </span>
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button>Mais detalhes</button>
+        </mat-card-actions>
+      </mat-card>
+    }
+  </div>
+</div>

@@ -9,7 +9,7 @@ import { environment } from '../../environments/environment';
 export class MissingPersonsService {
   private _httpClient = inject(HttpClient);
 
-  getMissingPersonList(): Observable<IMissingPersonListResponse> {
+  getMissingPersonListAll(): Observable<IMissingPersonListResponse> {
     return this._httpClient
       .get<IMissingPersonListResponse>(`${environment.apiUrl}/v1/pessoas/aberto/filtro`)  }
 }

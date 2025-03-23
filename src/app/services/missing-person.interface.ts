@@ -6,13 +6,13 @@ export interface IMissingPersonListResponse {
   first: boolean;
   last: boolean;
   size: number;
-  content: Content[];
+  content: IContent[];
   number: number;
   sort: Sort;
   empty: boolean;
 }
 
-export interface Content {
+export interface IContent {
   id: number;
   nome: string;
   idade: number;
