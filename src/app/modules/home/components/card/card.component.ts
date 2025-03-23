@@ -5,10 +5,11 @@ import { MatButton } from '@angular/material/button';
 import {
   IContent,
 } from '@services/missing-person.interface';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'card-component',
-  imports: [MatCardModule, MatButton],
+  imports: [MatCardModule, MatButton, RouterLink],
   templateUrl: './card.component.html',
 })
 

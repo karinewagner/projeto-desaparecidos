@@ -27,7 +27,7 @@ import {
 export class HomeComponent implements OnInit {
   private service = inject(MissingPersonsService);
 
-  missingPersonListAll: IContent[] = [];
+  missingPersonList: IContent[] = [];
 
   length!: number;
   pageIndex: number = 0;
@@ -37,17 +37,17 @@ export class HomeComponent implements OnInit {
   pageEvent!: PageEvent;
 
   ngOnInit() {
-    this.getMissingPersonListAll({
+    this.getMissingPersonList({
       pagina: this.pageIndex,
       porPagina: this.pageSize,
       status: 'DESAPARECIDO',
     });
   }
 
-  getMissingPersonListAll(params: IMissingPersonList) {
-    this.service.getMissingPersonListAll(params).subscribe(
+  getMissingPersonList(params: IMissingPersonList) {
+    this.service.getMissingPersonList(params).subscribe(
       res => {
-        this.missingPersonListAll = res.content;
+        this.missingPersonList = res.content;
         this.length = res.totalElements;
         this.pageIndex = res.pageable.pageNumber;
       }
@@ -56,7 +56,7 @@ export class HomeComponent implements OnInit {
 
   handlePageEvent(e: PageEvent) {
     this.pageEvent = e;
-    this.getMissingPersonListAll({
+    this.getMissingPersonList({
       pagina: e.pageIndex,
       porPagina: e.pageSize,
     });
@@ -64,7 +64,7 @@ export class HomeComponent implements OnInit {
 
   receiveOutputFilters(
     filters: Partial<IMissingPersonList>) {
-    this.getMissingPersonListAll({
+    this.getMissingPersonList({
       ...filters,
       pagina: 0,
       porPagina: this.pageSize,

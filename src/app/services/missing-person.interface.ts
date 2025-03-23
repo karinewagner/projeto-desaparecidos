@@ -24,11 +24,11 @@ export interface IContent {
 
 export interface UltimaOcorrencia {
   dtDesaparecimento: string;
-  dataLocalizacao?: any;
+  dataLocalizacao?: string;
   encontradoVivo: boolean;
   localDesaparecimentoConcat: string;
   ocorrenciaEntrevDesapDTO: OcorrenciaEntrevDesapDTO;
-  listaCartaz?: any;
+  listaCartaz?: ListaCartaz[];
   ocoId: number;
 }
 
@@ -60,4 +60,19 @@ export interface IMissingPersonList {
   status?: 'DESAPARECIDO' | 'LOCALIZADO',
   pagina: number,
   porPagina: number
+}
+
+export interface IMissingPersonByIdResponse {
+  id: number;
+  nome: string;
+  idade: number;
+  sexo: string;
+  vivo: boolean;
+  urlFoto: string;
+  ultimaOcorrencia: UltimaOcorrencia;
+}
+
+export interface ListaCartaz {
+  urlCartaz: string;
+  tipoCartaz: string;
 }
