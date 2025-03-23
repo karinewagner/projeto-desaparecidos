@@ -1,15 +1,30 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { DatePipe } from '@angular/common';
+
 import {
   IMissingPersonByIdResponse,
-  IMissingPersonList
 } from '@services/missing-person.interface';
 import { MissingPersonsService } from '@services/missing-persons.service';
-import { JsonPipe } from '@angular/common';
+
+import { MatCardModule } from '@angular/material/card';
+import { MatListModule } from '@angular/material/list';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'details-component',
-  imports: [JsonPipe],
+  imports: [
+    MatCardModule,
+    MatListModule,
+    MatDividerModule,
+    MatChipsModule,
+    MatIconModule,
+    MatButtonModule,
+    DatePipe,
+  ],
   templateUrl: './details.component.html',
 })
 
@@ -18,6 +33,7 @@ export class DetailsComponent implements OnInit {
   private service = inject(MissingPersonsService);
 
   personId: string = '';
+  daysMissing: number = 0;
   missingPersonDetails!: IMissingPersonByIdResponse;
 
   ngOnInit() {
@@ -29,7 +45,46 @@ export class DetailsComponent implements OnInit {
     this.service.getMissingPersonDetailsById(id).subscribe(
       res => {
         this.missingPersonDetails = res;
+        this.calculateDaysMissing();
       }
     );
+  }
+
+  calculateDaysMissing() {
+    const disappearanceDate = new Date(this.missingPersonDetails.ultimaOcorrencia.dtDesaparecimento);
+    const today = new Date();
+
+    console.log(disappearanceDate);
+    console.log(today);
+
+    const diffTime = today.getTime() - disappearanceDate.getTime();
+
+    this.daysMissing = Math.floor(diffTime / (1000 * 3600 * 24));
+  }
+
+  shareOnWhatsApp() {
+    const mensagem = encodeURIComponent(
+      `🚨 DESAPARECIDO 🚨\n\n
+      👤 Nome: ${this.missingPersonDetails.nome}\n
+      📍Última localização: ${this.missingPersonDetails.ultimaOcorrencia.localDesaparecimentoConcat}\n
+      📅 Desaparecido desde: ${new Date(this.missingPersonDetails.ultimaOcorrencia.dtDesaparecimento).toLocaleDateString()}\n
+      👕 Vestimentas: ${this.missingPersonDetails.ultimaOcorrencia.ocorrenciaEntrevDesapDTO.vestimentasDesaparecido}\n
+      📢 Ajude a encontrar! Compartilhe!\n
+      🔗 ${this.missingPersonDetails.urlFoto}`
+    );
+
+    window.open(`https://wa.me/?text=${mensagem}`, '_blank');
+  }
+
+  shareOnInstagram() {
+    const mensagem =
+      `🚨 DESAPARECIDO 🚨\n\n
+      👤 Nome: ${this.missingPersonDetails.nome}\n
+      📍 Última localização: ${this.missingPersonDetails.ultimaOcorrencia.localDesaparecimentoConcat}\n
+      📅 Desaparecido desde: ${new Date(this.missingPersonDetails.ultimaOcorrencia.dtDesaparecimento).toLocaleDateString()}\n
+      👕 Vestimentas: ${this.missingPersonDetails.ultimaOcorrencia.ocorrenciaEntrevDesapDTO.vestimentasDesaparecido}\n
+      📢 Ajude a encontrar! Compartilhe!`;
+
+    alert('Copie esta mensagem e compartilhe no Instagram:\n\n' + mensagem);
   }
 }

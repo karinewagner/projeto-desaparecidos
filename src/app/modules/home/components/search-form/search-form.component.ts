@@ -1,10 +1,10 @@
 import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatRadioModule } from '@angular/material/radio';
-import { JsonPipe } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
@@ -16,7 +16,6 @@ import { MatIconModule } from '@angular/material/icon';
     MatButtonModule,
     MatRadioModule,
     MatIconModule,
-    JsonPipe
   ],
   templateUrl: './search-form.component.html',
 })
