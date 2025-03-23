@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -23,6 +23,8 @@ import { MatIconModule } from '@angular/material/icon';
 export class SearchFormComponent implements OnInit {
   private _fb = inject(FormBuilder);
 
+  @Output() outputFilters = new EventEmitter<any>();
+
   form!: FormGroup;
 
   ngOnInit() {
@@ -35,7 +37,24 @@ export class SearchFormComponent implements OnInit {
       faixaIdadeInicial: [0],
       faixaIdadeFinal: [0],
       sexo: [''],
-      status: ['']
+      status: ['DESAPARECIDO']
     })
+  }
+
+  clearFilter() {
+    this.form.reset({
+      nome: '',
+      faixaIdadeInicial: 0,
+      faixaIdadeFinal: 0,
+      sexo: '',
+      status: 'DESAPARECIDO',
+      pagina: 0,
+      porPagina: 10,
+    });
+    this.outputFilters.emit(this.form.value)
+  }
+
+  sendOutputFilters() {
+    this.outputFilters.emit(this.form.value)
   }
 }

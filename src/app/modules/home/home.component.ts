@@ -2,7 +2,10 @@ import { Component, inject, OnInit } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 
-import { IContent } from '@services/missing-person.interface';
+import {
+  IContent,
+  IMissingPersonList
+} from '@services/missing-person.interface';
 import { MissingPersonsService } from '@services/missing-persons.service';
 
 import { CardComponent } from '@modules/home/components/card/card.component';
@@ -27,8 +30,8 @@ export class HomeComponent implements OnInit {
   missingPersonListAll: IContent[] = [];
 
   length!: number;
-  pageSize: number = 10;
   pageIndex: number = 0;
+  pageSize: number = 10;
   pageSizeOptions = [10, 20, 30];
 
   pageEvent!: PageEvent;
@@ -37,10 +40,11 @@ export class HomeComponent implements OnInit {
     this.getMissingPersonListAll({
       pagina: this.pageIndex,
       porPagina: this.pageSize,
+      status: 'DESAPARECIDO',
     });
   }
 
-  getMissingPersonListAll(params: {pagina: number, porPagina: number}) {
+  getMissingPersonListAll(params: IMissingPersonList) {
     this.service.getMissingPersonListAll(params).subscribe(
       res => {
         this.missingPersonListAll = res.content;
@@ -55,6 +59,15 @@ export class HomeComponent implements OnInit {
     this.getMissingPersonListAll({
       pagina: e.pageIndex,
       porPagina: e.pageSize,
+    });
+  }
+
+  receiveOutputFilters(
+    filters: Partial<IMissingPersonList>) {
+    this.getMissingPersonListAll({
+      ...filters,
+      pagina: 0,
+      porPagina: this.pageSize,
     });
   }
 }

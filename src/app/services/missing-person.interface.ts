@@ -51,3 +51,13 @@ export interface Sort {
   sorted: boolean;
   empty: boolean;
 }
+
+export interface IMissingPersonList {
+  nome?: string,
+  faixaIdadeInicial?: number,
+  faixaIdadeFinal?: number,
+  sexo?: 'MASCULINO' | 'FEMININO',
+  status?: 'DESAPARECIDO' | 'LOCALIZADO',
+  pagina: number,
+  porPagina: number
+}

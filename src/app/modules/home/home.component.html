@@ -1,8 +1,8 @@
 
-<search-form-component/>
+<search-form-component (outputFilters)="receiveOutputFilters($event)"/>
 
 <div class="w-full max-w-7xl mx-auto mt-5">
-  <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+  <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
     @for (missingPerson of missingPersonListAll; track missingPerson.id) {
       <card-component [missingPerson]="missingPerson"/>
     }

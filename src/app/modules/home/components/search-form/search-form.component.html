@@ -48,11 +48,11 @@
     </mat-radio-group>
   </div>
   <div class="flex gap-3">
-    <button mat-raised-button>
+    <button mat-raised-button (click)="clearFilter()">
       <mat-icon>close</mat-icon>
       Limpar
     </button>
-    <button mat-flat-button>
+    <button mat-flat-button (click)="sendOutputFilters()">
       <mat-icon>search</mat-icon>
       Buscar
     </button>
