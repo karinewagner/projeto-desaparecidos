@@ -6,7 +6,7 @@ import { environment } from '../../environments/environment';
 
 import {
   IMissingPersonByIdResponse, IMissingPersonList,
-  IMissingPersonListResponse
+  IMissingPersonListResponse, IMoreInformation
 } from './missing-person.interface';
 
 @Injectable({providedIn: 'root'})
@@ -31,5 +31,12 @@ export class MissingPersonsService {
   getMissingPersonDetailsById(id: string): Observable<IMissingPersonByIdResponse> {
     return this._httpClient
       .get<IMissingPersonByIdResponse>(`${environment.apiUrl}/v1/pessoas/${id}`)
+  }
+
+  postMoreInformation(body: IMoreInformation): Observable<IMoreInformation> {
+    return this._httpClient
+      .post<IMoreInformation>(
+        `${environment.apiUrl}/v1/ocorrencias/informacoes-desaparecido`, body
+      )
   }
 }

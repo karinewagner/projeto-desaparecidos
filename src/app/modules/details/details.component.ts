@@ -13,6 +13,10 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialog } from '@angular/material/dialog';
+import {
+  DialogInformationComponent
+} from '@modules/details/components/dialog-information.component';
 
 @Component({
   selector: 'details-component',
@@ -31,6 +35,7 @@ import { MatButtonModule } from '@angular/material/button';
 export class DetailsComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private service = inject(MissingPersonsService);
+  dialog = inject(MatDialog);
 
   personId: string = '';
   daysMissing: number = 0;
@@ -60,6 +65,12 @@ export class DetailsComponent implements OnInit {
     const diffTime = today.getTime() - disappearanceDate.getTime();
 
     this.daysMissing = Math.floor(diffTime / (1000 * 3600 * 24));
+  }
+
+  openDialogInformation(): void {
+    this.dialog.open(DialogInformationComponent, {
+      data: this.missingPersonDetails,
+    })
   }
 
   shareOnWhatsApp() {

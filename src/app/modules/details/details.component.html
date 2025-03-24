@@ -29,7 +29,10 @@
   </mat-card-header>
 
   <mat-card-content>
-    <p><strong>Última Ocorrência:</strong></p>
+    <p class="text-xl">Dados dobre o desaparecimento:</p>
+  </mat-card-content>
+
+  <mat-card-content>
     <p>
       <strong>Local:</strong>
       {{ missingPersonDetails?.ultimaOcorrencia?.localDesaparecimentoConcat }}
@@ -41,26 +44,33 @@
           | date:'dd/MM/yyyy'
       }}
     </p>
-    <mat-divider></mat-divider>
-
     <p>
       <strong>Informações:</strong>
-      {{ missingPersonDetails?.ultimaOcorrencia?.ocorrenciaEntrevDesapDTO?.informacao}}
+      {{ missingPersonDetails?.ultimaOcorrencia?.ocorrenciaEntrevDesapDTO?.informacao ?? '-' }}
     </p>
     <p>
       <strong>Vestimentas:</strong>
-      {{ missingPersonDetails?.ultimaOcorrencia?.ocorrenciaEntrevDesapDTO?.vestimentasDesaparecido }}
+      {{ missingPersonDetails?.ultimaOcorrencia?.ocorrenciaEntrevDesapDTO?.vestimentasDesaparecido ?? '-' }}
     </p>
-
   </mat-card-content>
 
-  <mat-card-actions align="end">
-    <button mat-button color="primary" (click)="shareOnWhatsApp()">
+  <mat-card-actions align="start">
+    <button mat-fab extended (click)="openDialogInformation()">
+      <mat-icon>info</mat-icon> Vui ou tem informações dessa pessoa?
+    </button>
+  </mat-card-actions>
+
+  <mat-card-content>
+    <p class="text-2xl">Ajude compartilhando:</p>
+  </mat-card-content>
+  <mat-card-actions align="start">
+    <button mat-raised-button color="primary" (click)="shareOnWhatsApp()">
       <mat-icon>share</mat-icon> Compartilhar no WhatsApp
     </button>
-    <button mat-button color="accent" (click)="shareOnInstagram()">
+    <button mat-raised-button color="accent" (click)="shareOnInstagram()">
       <mat-icon>share</mat-icon> Compartilhar no Instagram
     </button>
   </mat-card-actions>
+
 
 </mat-card>

@@ -1,0 +1,40 @@
+<h2 mat-dialog-title>Formulário de informações</h2>
+<mat-dialog-content class="mat-typography">
+  <p>Desaparecido: {{ dialogData.nome }}</p>
+  <form [formGroup]="formInfo">
+    <mat-form-field appearance="outline">
+      <mat-label>Informe uma data</mat-label>
+      <input matInput formControlName="data" [matDatepicker]="picker">
+      <mat-hint>DD/MM/YYYY</mat-hint>
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="example-full-width">
+      <mat-label>Message</mat-label>
+      <input
+        matInput
+        #message
+        formControlName="informacao"
+        maxlength="256"
+        placeholder="Digite sua mensagem"
+      >
+      <mat-hint align="end">{{ message.value.length }} / 256</mat-hint>
+    </mat-form-field>
+
+    <!--  TODO: Colocar um botão para subir imagem -->
+
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-raised-button mat-dialog-close>Cancelar</button>
+  <button
+    mat-flat-button
+    [mat-dialog-close]="true"
+    (click)="createFormInformation()"
+  >
+    Enviar
+  </button>
+</mat-dialog-actions>

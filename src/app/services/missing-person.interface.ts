@@ -76,3 +76,11 @@ export interface ListaCartaz {
   urlCartaz: string;
   tipoCartaz: string;
 }
+
+export interface IMoreInformation {
+  ocoId: 0,
+  informacao: string,
+  data: string,
+  id: 0,
+  anexos: string[]
+}
