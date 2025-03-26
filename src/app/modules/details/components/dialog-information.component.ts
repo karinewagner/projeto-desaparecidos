@@ -4,7 +4,7 @@ import {
   FormBuilder,
   FormGroup,
   FormsModule,
-  ReactiveFormsModule
+  ReactiveFormsModule, Validators
 } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
@@ -14,6 +14,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MissingPersonsService } from '@services/missing-persons.service';
 import { MatCardModule } from '@angular/material/card';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'dialog-information-component',
@@ -27,11 +28,14 @@ import { MatCardModule } from '@angular/material/card';
     MatDatepickerModule,
     MatCardModule,
   ],
-  providers: [provideNativeDateAdapter()],
+  providers: [
+    provideNativeDateAdapter(),
+  ],
   templateUrl: './dialog-information.component.html',
 })
 export class DialogInformationComponent implements OnInit {
   private _fb = inject(FormBuilder);
+  private toastr = inject(ToastrService);
   private service = inject(MissingPersonsService);
   readonly dialogData = inject(MAT_DIALOG_DATA);
 
@@ -42,8 +46,8 @@ export class DialogInformationComponent implements OnInit {
   ngOnInit() {
     this.formInfo = this._fb.group({
       ocoId: [this.dialogData.ultimaOcorrencia.ocoId],
-      informacao: [''],
-      data: [''],
+      informacao: ['', Validators.required],
+      data: ['', Validators.required],
       id: [this.dialogData.id],
     });
   };
@@ -55,7 +59,12 @@ export class DialogInformationComponent implements OnInit {
     }
   }
 
-  sendFormInformation(){
+  sendFormInformation() {
+    if (this.formInfo.invalid) {
+      this.showErrorMessage();
+      return;
+    }
+
     const date = new Date(this.formInfo.value.data);
     const formattedDate = date.toISOString().split('T')[0];
 
@@ -66,8 +75,18 @@ export class DialogInformationComponent implements OnInit {
 
     this.service.postMoreInformation(formInfo, this.selectedFiles)
       .subscribe({
-        next: res => {console.log(res)},
-        error: err => {console.log(err)}
+        next: res => console.log(res),
+        error: err => console.log(err),
       });
+
+    this.showSuccessMessage();
+  }
+
+  showErrorMessage() {
+    this.toastr.warning('Por gentileza, preeencha todos os campos obrigatórios.');
+  }
+
+  showSuccessMessage() {
+    this.toastr.success('Dados enviados com sucesso!');
   }
 }

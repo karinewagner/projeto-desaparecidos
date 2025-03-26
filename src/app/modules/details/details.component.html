@@ -1,14 +1,14 @@
 <mat-card appearance="outlined">
   <mat-card-header>
     <mat-card-title-group>
-      <mat-card-title>{{ missingPersonDetails?.nome }}</mat-card-title>
+      <mat-card-title>{{ missingPersonDetails.nome }}</mat-card-title>
       <mat-card-subtitle>
-        {{ missingPersonDetails?.idade }} anos - {{ missingPersonDetails?.sexo }}
+        {{ missingPersonDetails.idade }} anos - {{ missingPersonDetails.sexo }}
         <div class="text-center bg-orange-400 text-black font-bold text-xl p-2 rounded-lg my-2 w-80">
           <p><strong>{{ daysMissing }} dias do desaparecimento</strong></p>
         </div>
       </mat-card-subtitle>
-      @if (missingPersonDetails?.urlFoto) {
+      @if (missingPersonDetails.urlFoto) {
         <img
           mat-card-image
           [src]="missingPersonDetails.urlFoto"
@@ -35,22 +35,22 @@
   <mat-card-content>
     <p>
       <strong>Local:</strong>
-      {{ missingPersonDetails?.ultimaOcorrencia?.localDesaparecimentoConcat }}
+      {{ missingPersonDetails.ultimaOcorrencia.localDesaparecimentoConcat }}
     </p>
     <p>
       <strong>Data do desaparecimento:</strong>
       {{
-        missingPersonDetails?.ultimaOcorrencia?.dtDesaparecimento
+        missingPersonDetails.ultimaOcorrencia.dtDesaparecimento
           | date:'dd/MM/yyyy'
       }}
     </p>
     <p>
       <strong>Informações:</strong>
-      {{ missingPersonDetails?.ultimaOcorrencia?.ocorrenciaEntrevDesapDTO?.informacao ?? '-' }}
+      {{ missingPersonDetails.ultimaOcorrencia.ocorrenciaEntrevDesapDTO.informacao}}
     </p>
     <p>
       <strong>Vestimentas:</strong>
-      {{ missingPersonDetails?.ultimaOcorrencia?.ocorrenciaEntrevDesapDTO?.vestimentasDesaparecido ?? '-' }}
+      {{ missingPersonDetails.ultimaOcorrencia.ocorrenciaEntrevDesapDTO.vestimentasDesaparecido}}
     </p>
   </mat-card-content>
 
