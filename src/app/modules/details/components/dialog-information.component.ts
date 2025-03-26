@@ -13,7 +13,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MissingPersonsService } from '@services/missing-persons.service';
-import { IMoreInformation } from '@services/missing-person.interface';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'dialog-information-component',
@@ -24,7 +24,8 @@ import { IMoreInformation } from '@services/missing-person.interface';
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatCardModule,
   ],
   providers: [provideNativeDateAdapter()],
   templateUrl: './dialog-information.component.html',
@@ -36,17 +37,37 @@ export class DialogInformationComponent implements OnInit {
 
   formInfo!: FormGroup;
 
+  selectedFiles: File[] = [];
+
   ngOnInit() {
     this.formInfo = this._fb.group({
-      ocoId: [0],
+      ocoId: [this.dialogData.ultimaOcorrencia.ocoId],
       informacao: [''],
       data: [''],
-      id: [0],
-      anexos: []
+      id: [this.dialogData.id],
     });
   };
 
-  createFormInformation(){
-    this.service.postMoreInformation(this.formInfo.value).subscribe();
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.selectedFiles = Array.from(input.files);
+    }
+  }
+
+  sendFormInformation(){
+    const date = new Date(this.formInfo.value.data);
+    const formattedDate = date.toISOString().split('T')[0];
+
+    const formInfo = {
+      ...this.formInfo.value,
+      data: formattedDate,
+    };
+
+    this.service.postMoreInformation(formInfo, this.selectedFiles)
+      .subscribe({
+        next: res => {console.log(res)},
+        error: err => {console.log(err)}
+      });
   }
 }

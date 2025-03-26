@@ -1,4 +1,4 @@
-<mat-card appearance="outlined" class="h-full">
+<mat-card appearance="outlined" class="h-full flex flex-col">
   @if (missingPerson.urlFoto) {
     <img
       mat-card-image
@@ -14,13 +14,12 @@
       class="object-cover h-60"
     >
   }
-  <mat-card-content>
+  <mat-card-content class="flex-1">
     <p class="font-semibold">
       Nome: <span class="font-normal">{{ missingPerson.nome }}</span>
     </p>
     <p class="font-semibold">
-      Idade: <span class="font-normal">{{ missingPerson.idade }}
-      anos</span>
+      Idade: <span class="font-normal">{{ missingPerson.idade }} anos</span>
     </p>
     <p class="font-semibold">
       Sexo: <span class="font-normal">{{ missingPerson.sexo }}</span>
@@ -34,11 +33,13 @@
     <p class="font-semibold">
       Local:
       <span class="font-normal">
-    {{ missingPerson.ultimaOcorrencia.localDesaparecimentoConcat }}
-  </span>
+        {{ missingPerson.ultimaOcorrencia.localDesaparecimentoConcat }}
+      </span>
     </p>
   </mat-card-content>
-  <mat-card-actions>
-    <button mat-button [routerLink]="['details', missingPerson.id]">Mais detalhes</button>
+  <mat-card-actions class="mt-auto">
+    <button mat-button color="primary" class="w-full" [routerLink]="['details', missingPerson.id]">
+      Mais detalhes
+    </button>
   </mat-card-actions>
 </mat-card>

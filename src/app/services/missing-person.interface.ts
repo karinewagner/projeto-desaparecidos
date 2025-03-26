@@ -82,5 +82,4 @@ export interface IMoreInformation {
   informacao: string,
   data: string,
   id: 0,
-  anexos: string[]
 }

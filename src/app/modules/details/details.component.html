@@ -5,19 +5,19 @@
       <mat-card-subtitle>
         {{ missingPersonDetails?.idade }} anos - {{ missingPersonDetails?.sexo }}
         <div class="text-center bg-orange-400 text-black font-bold text-xl p-2 rounded-lg my-2 w-80">
-          <p><strong>{{ daysMissing }} days missing</strong></p>
+          <p><strong>{{ daysMissing }} dias do desaparecimento</strong></p>
         </div>
       </mat-card-subtitle>
       @if (missingPersonDetails?.urlFoto) {
         <img
-          mat-card-sm-image
+          mat-card-image
           [src]="missingPersonDetails.urlFoto"
           alt="Foto da pessoa desaparecida"
           class="object-cover h-60"
         >
       } @else {
         <img
-          mat-card-lg-image
+          mat-card-image
           src="/assets/img/unidentified-person.jpg"
           alt="Foto da pessoa"
           class="object-cover h-60"

@@ -14,13 +14,7 @@ export class MissingPersonsService {
   private _httpClient = inject(HttpClient);
 
   getMissingPersonList(params: IMissingPersonList): Observable<IMissingPersonListResponse> {
-    const filteredParams = Object.fromEntries(
-      Object.entries(params)
-        .filter(([_, value]) => value !== null && value !== undefined)
-        .map(([key, value]) => [key, String(value)])
-    );
-
-    const httpParams = new HttpParams({ fromObject: filteredParams });
+    const httpParams = new HttpParams({ fromObject: {...params} });
 
     return this._httpClient
       .get<IMissingPersonListResponse>(`${environment.apiUrl}/v1/pessoas/aberto/filtro`, {
@@ -33,10 +27,20 @@ export class MissingPersonsService {
       .get<IMissingPersonByIdResponse>(`${environment.apiUrl}/v1/pessoas/${id}`)
   }
 
-  postMoreInformation(body: IMoreInformation): Observable<IMoreInformation> {
+  postMoreInformation(body: IMoreInformation, anexos: File[]): Observable<IMoreInformation> {
+    const httpParams = new HttpParams({ fromObject: {...body} });
+
+    const formData = new FormData();
+
+    anexos.forEach((file) => {
+      formData.append(`files`, file, file.name);
+    });
+
     return this._httpClient
       .post<IMoreInformation>(
-        `${environment.apiUrl}/v1/ocorrencias/informacoes-desaparecido`, body
+        `${environment.apiUrl}/v1/ocorrencias/informacoes-desaparecido`, formData, {
+          params: httpParams,
+        }
       )
   }
 }
