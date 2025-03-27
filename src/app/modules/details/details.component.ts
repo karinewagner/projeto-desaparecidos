@@ -4,11 +4,8 @@ import { DatePipe } from '@angular/common';
 
 import {
   IMissingPersonByIdResponse,
-  ListaCartaz,
-  OcorrenciaEntrevDesapDTO,
-  UltimaOcorrencia,
-} from '@services/missing-person.interface';
-import { MissingPersonsService } from '@services/missing-persons.service';
+} from '@modules/services/missing-person.interface';
+import { MissingPersonsService } from '@modules/services/missing-persons.service';
 
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';

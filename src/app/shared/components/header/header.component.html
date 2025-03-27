@@ -12,12 +12,13 @@
       class="p-1 w-60 text-center font-semibold bg-[#ffecaf] border
       border-b-[#c19b26] text-[#c19b26] rounded-xl"
     >
-      LOCALIZADOS: 3908
+      LOCALIZADOS: {{ statisticsData.quantPessoasEncontradas }}
     </h2>
+    <!--  TODO: corrigir os valores de localizados e desaparecidos, conforme vem da API  -->
     <h2 class="p-1 w-60 text-center font-semibold bg-[#ffaaaa] border
     border-b-[#a32424] text-[#a32424] rounded-xl"
     >
-      DESAPARECIDOS: 3908
+      DESAPARECIDOS: {{ statisticsData.quantPessoasDesaparecidas }}
     </h2>
   </div>
   <div class="flex flex-1 flex-col items-end">
@@ -28,7 +29,12 @@
       target="_blank"
       class="underline text-blue-400 flex gap-2"
     >
-      <img src="/assets/icons/github.png" class="w-5 h-5"/>Repositório GitHub
+      <img
+        src="/assets/icons/github.png"
+        alt="Icone do Github"
+        class="w-5 h-5"
+      />
+      Repositório GitHub
     </a>
   </div>
 </div>
