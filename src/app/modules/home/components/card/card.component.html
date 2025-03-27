@@ -1,20 +1,13 @@
-<mat-card appearance="outlined" class="h-full flex flex-col">
-  @if (missingPerson.urlFoto) {
-    <img
-      mat-card-image
-      [src]="missingPerson.urlFoto"
-      alt="Foto da pessoa desaparecida"
-      class="object-cover h-60"
-    >
-  } @else {
-    <img
-      mat-card-image
-      src="/assets/img/unidentified-person.jpg"
-      alt="Foto da pessoa"
-      class="object-cover h-60"
-    >
-  }
-  <mat-card-content class="flex-1">
+<mat-card appearance="outlined" class="h-full flex flex-col shadow-md">
+
+  <img
+    mat-card-image
+    [src]="missingPerson.urlFoto || '/assets/img/unidentified-person.jpg'"
+    [alt]="'Foto da pessoa desaparecida: ' + missingPerson.nome"
+    class="w-full h-60 object-cover rounded-md"
+  >
+
+  <mat-card-content class="flex-1 flex flex-col gap-2 mt-4">
     <p class="font-semibold">
       Nome: <span class="font-normal">{{ missingPerson.nome }}</span>
     </p>
@@ -37,6 +30,7 @@
       </span>
     </p>
   </mat-card-content>
+
   <mat-card-actions class="mt-auto">
     <button mat-button color="primary" class="w-full" [routerLink]="['details', missingPerson.id]">
       Mais detalhes

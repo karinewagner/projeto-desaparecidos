@@ -1,58 +1,79 @@
 <form
   [formGroup]="form"
-  class="flex flex-row justify-around items-center bg-gray-100"
+  class="p-6 rounded-md shadow-md flex flex-col gap-2 bg-search-form"
 >
-  <mat-form-field appearance="outline">
+  <div class="flex flex-col">
+    <h2 class="text-2xl font-semibold text-center">
+      FAÇA SUA BUSCA
+    </h2>
+    <span class="mb-2 text-xl text-center text-gray-500">
+      Os dados abaixo ajudam a tornar sua busca mais específica!
+    </span>
+  </div>
+  <mat-form-field appearance="outline" class="w-full ">
     <mat-label>Nome</mat-label>
-    <input matInput formControlName="nome" type="text" placeholder="Nome">
+    <input
+      matInput
+      formControlName="nome"
+      type="text"
+      placeholder="Digite um nome"
+    >
   </mat-form-field>
-  <div>
-    <p>Faixa Etária</p>
-    <div class="flex gap-3">
-      <mat-form-field appearance="outline">
-        <mat-label>Mínima</mat-label>
-        <input
-          matInput
-          formControlName="faixaIdadeInicial"
-          type="number"
-          min="0"
-          max="99"
-          placeholder="Idade mínima"
-        >
-      </mat-form-field>
-      <mat-form-field appearance="outline">
-        <mat-label>Máxima</mat-label>
-        <input
-          matInput
-          formControlName="faixaIdadeFinal"
-          type="number"
-          min="0"
-          max="99"
-          placeholder="Idade máxima"
-        >
-      </mat-form-field>
+
+  <div class="flex gap-4">
+    <div class="flex-1">
+      <p class="font-semibold mb-2">Faixa Etária</p>
+      <div class="flex gap-3">
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>Mínima</mat-label>
+          <input
+            matInput
+            formControlName="faixaIdadeInicial"
+            type="number"
+            min="0"
+            max="99"
+            placeholder="Idade mínima"
+          >
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>Máxima</mat-label>
+          <input
+            matInput
+            formControlName="faixaIdadeFinal"
+            type="number"
+            min="0"
+            max="99"
+            placeholder="Idade máxima"
+          >
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="flex flex-1 ">
+      <div class="flex-1">
+        <p class="font-semibold mb-4">Sexo</p>
+        <mat-radio-group formControlName="sexo" class="flex gap-1">
+          <mat-radio-button value="MASCULINO">Masculino</mat-radio-button>
+          <mat-radio-button value="FEMININO">Feminino</mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+      <div class="flex-1">
+        <p class="font-semibold mb-4">Status</p>
+        <mat-radio-group formControlName="status" class="flex gap-1">
+          <mat-radio-button value="DESAPARECIDO">Desaparecido</mat-radio-button>
+          <mat-radio-button value="LOCALIZADO">Localizado</mat-radio-button>
+        </mat-radio-group>
+      </div>
     </div>
   </div>
-  <div class="flex flex-row">
-    <label>Sexo: </label>
-    <mat-radio-group formControlName="sexo" class="flex flex-col">
-      <mat-radio-button value="MASCULINO">Masculino</mat-radio-button>
-      <mat-radio-button value="FEMININO">Feminino</mat-radio-button>
-    </mat-radio-group>
-  </div>
-  <div class="flex flex-row">
-    <label>Status: </label>
-    <mat-radio-group formControlName="status" class="flex flex-col">
-      <mat-radio-button value="DESAPARECIDO">Desaparecido</mat-radio-button>
-      <mat-radio-button value="LOCALIZADO">Localizado</mat-radio-button>
-    </mat-radio-group>
-  </div>
-  <div class="flex gap-3">
-    <button mat-raised-button (click)="clearFilter()">
+
+  <div class="flex gap-2 justify-center">
+    <button mat-raised-button color="warn" (click)="clearFilter()">
       <mat-icon>close</mat-icon>
       Limpar
     </button>
-    <button mat-flat-button (click)="sendOutputFilters()">
+    <button mat-flat-button color="primary" (click)="sendOutputFilters()">
       <mat-icon>search</mat-icon>
       Buscar
     </button>

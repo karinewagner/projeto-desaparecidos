@@ -75,11 +75,15 @@ export class DialogInformationComponent implements OnInit {
 
     this.service.postMoreInformation(formInfo, this.selectedFiles)
       .subscribe({
-        next: res => console.log(res),
-        error: err => console.log(err),
+        next: res => {
+          this.showSuccessMessage();
+          console.log(res);
+        },
+        error: err => {
+          this.toastr.error('Erro ao enviar dados: ' + err.message);
+          console.log(err);
+        },
       });
-
-    this.showSuccessMessage();
   }
 
   showErrorMessage() {

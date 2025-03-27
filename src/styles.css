@@ -2,12 +2,6 @@
 
 @import "tailwindcss";
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
 html,
 body {
   height: 100%;
@@ -17,8 +11,16 @@ body {
   margin: 0;
   font-family:
     Roboto, "Helvetica Neue", sans-serif;
+  background: rgb(62,88,117);
+  background: radial-gradient(circle, rgba(62,88,117,1) 0%, rgba(74,74,74,1) 100%);
 }
 
 .mdc-notched-outline__notch {
   border-right: none;
 }
+
+.bg-search-form {
+  background: rgb(249,249,249);
+  background: radial-gradient(circle, rgba(249,249,249,1) 93%, rgba(180,202,227,1) 100%);
+}
+

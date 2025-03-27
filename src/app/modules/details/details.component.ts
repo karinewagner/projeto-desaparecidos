@@ -4,6 +4,9 @@ import { DatePipe } from '@angular/common';
 
 import {
   IMissingPersonByIdResponse,
+  ListaCartaz,
+  OcorrenciaEntrevDesapDTO,
+  UltimaOcorrencia,
 } from '@services/missing-person.interface';
 import { MissingPersonsService } from '@services/missing-persons.service';
 
@@ -39,7 +42,28 @@ export class DetailsComponent implements OnInit {
 
   personId: string = '';
   daysMissing: number = 0;
-  missingPersonDetails!: IMissingPersonByIdResponse;
+  missingPersonDetails: IMissingPersonByIdResponse = {
+    id: 0,
+    nome: '',
+    idade: 0,
+    sexo: '',
+    vivo: true,
+    urlFoto: '',
+    ultimaOcorrencia: {
+      dtDesaparecimento: '',
+      encontradoVivo: true,
+      localDesaparecimentoConcat: '',
+      ocorrenciaEntrevDesapDTO: {
+        informacao: '',
+        vestimentasDesaparecido: '',
+      },
+      listaCartaz: [{
+        urlCartaz: '',
+        tipoCartaz: '',
+      }],
+      ocoId: 0,
+    },
+  };
 
   ngOnInit() {
     this.personId = this.route.snapshot.params['id'];
@@ -58,9 +82,6 @@ export class DetailsComponent implements OnInit {
   calculateDaysMissing() {
     const disappearanceDate = new Date(this.missingPersonDetails.ultimaOcorrencia.dtDesaparecimento);
     const today = new Date();
-
-    console.log(disappearanceDate);
-    console.log(today);
 
     const diffTime = today.getTime() - disappearanceDate.getTime();
 

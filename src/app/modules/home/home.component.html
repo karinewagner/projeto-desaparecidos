@@ -1,21 +1,23 @@
+<div class="flex flex-col max-w-7xl mx-auto">
+  <search-form-component (outputFilters)="receiveOutputFilters($event)"/>
 
-<search-form-component (outputFilters)="receiveOutputFilters($event)"/>
+  <div class="w-full mt-5">
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+      @for (missingPerson of missingPersonList; track missingPerson.id) {
+        <card-component [missingPerson]="missingPerson" />
+      }
+    </div>
+  </div>
 
-<div class="w-full max-w-7xl mx-auto mt-5">
-  <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
-    @for (missingPerson of missingPersonList; track missingPerson.id) {
-      <card-component [missingPerson]="missingPerson"/>
-    }
+  <div class="flex justify-center rounded-md shadow-md my-4 bg-search-form">
+    <mat-paginator
+      #paginator
+      (page)="handlePageEvent($event)"
+      [length]="length"
+      [pageSize]="pageSize"
+      [showFirstLastButtons]="true"
+      [pageSizeOptions]="pageSizeOptions"
+      [pageIndex]="pageIndex"
+    />
   </div>
 </div>
-
-<mat-paginator
-  #paginator
-  (page)="handlePageEvent($event)"
-  [length]="length"
-  [pageSize]="pageSize"
-  [showFirstLastButtons]="true"
-  [pageSizeOptions]="pageSizeOptions"
-  [pageIndex]="pageIndex"
-  class="demo-paginator"
-/>
