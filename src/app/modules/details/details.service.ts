@@ -5,22 +5,13 @@ import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 
 import {
-  IMissingPersonByIdResponse, IMissingPersonList,
-  IMissingPersonListResponse, IMoreInformation
-} from './missing-person.interface';
+  IMissingPersonByIdResponse,
+  IMoreInformation
+} from './details.interface';
 
 @Injectable({providedIn: 'root'})
-export class MissingPersonsService {
+export class DetailsService {
   private _httpClient = inject(HttpClient);
-
-  getMissingPersonList(params: IMissingPersonList): Observable<IMissingPersonListResponse> {
-    const httpParams = new HttpParams({ fromObject: {...params} });
-
-    return this._httpClient
-      .get<IMissingPersonListResponse>(`${environment.apiUrl}/v1/pessoas/aberto/filtro`, {
-        params: httpParams,
-      })
-    }
 
   getMissingPersonDetailsById(id: string): Observable<IMissingPersonByIdResponse> {
     return this._httpClient

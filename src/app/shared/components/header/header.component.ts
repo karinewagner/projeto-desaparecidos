@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 
 import { HeaderService } from './header.service';
 import { IStatisticsData } from './header.interface';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'header-component',
@@ -11,6 +12,7 @@ import { IStatisticsData } from './header.interface';
 
 export class HeaderComponent implements OnInit {
   private service = inject(HeaderService);
+  private toast = inject(ToastrService);
 
   statisticsData: IStatisticsData = {
     quantPessoasDesaparecidas: 0,
@@ -26,7 +28,8 @@ export class HeaderComponent implements OnInit {
       next: res => {
         this.statisticsData = res;
       },
-      error: err => console.log(err),
+      error: err =>
+        this.toast.error('Erro ao buscar dados: ' + err.message),
     });
   }
 }

@@ -7,7 +7,7 @@ import { MatButton } from '@angular/material/button';
 
 import {
   IContent,
-} from '@modules/services/missing-person.interface';
+} from '@modules/details/details.interface';
 
 @Component({
   selector: 'card-component',

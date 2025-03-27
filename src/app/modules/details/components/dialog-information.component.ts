@@ -12,7 +12,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
-import { MissingPersonsService } from '@modules/services/missing-persons.service';
+import { DetailsService } from '@modules/details/details.service';
 import { MatCardModule } from '@angular/material/card';
 import { ToastrService } from 'ngx-toastr';
 
@@ -35,8 +35,8 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class DialogInformationComponent implements OnInit {
   private _fb = inject(FormBuilder);
-  private toastr = inject(ToastrService);
-  private service = inject(MissingPersonsService);
+  private toast = inject(ToastrService);
+  private service = inject(DetailsService);
   readonly dialogData = inject(MAT_DIALOG_DATA);
 
   formInfo!: FormGroup;
@@ -80,17 +80,16 @@ export class DialogInformationComponent implements OnInit {
           console.log(res);
         },
         error: err => {
-          this.toastr.error('Erro ao enviar dados: ' + err.message);
-          console.log(err);
+          this.toast.error('Erro ao enviar dados: ' + err.message);
         },
       });
   }
 
   showErrorMessage() {
-    this.toastr.warning('Por gentileza, preeencha todos os campos obrigatórios.');
+    this.toast.warning('Por gentileza, preeencha todos os campos obrigatórios.');
   }
 
   showSuccessMessage() {
-    this.toastr.success('Dados enviados com sucesso!');
+    this.toast.success('Dados enviados com sucesso!');
   }
 }

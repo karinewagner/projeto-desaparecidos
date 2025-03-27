@@ -62,24 +62,7 @@ export interface IMissingPersonList {
   porPagina: number
 }
 
-export interface IMissingPersonByIdResponse {
-  id: number;
-  nome: string;
-  idade: number;
-  sexo: string;
-  vivo: boolean;
-  urlFoto: string;
-  ultimaOcorrencia: UltimaOcorrencia;
-}
-
 export interface ListaCartaz {
   urlCartaz: string;
   tipoCartaz: string;
-}
-
-export interface IMoreInformation {
-  ocoId: 0,
-  informacao: string,
-  data: string,
-  id: 0,
 }

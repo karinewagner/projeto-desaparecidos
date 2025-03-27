@@ -4,8 +4,8 @@ import { DatePipe } from '@angular/common';
 
 import {
   IMissingPersonByIdResponse,
-} from '@modules/services/missing-person.interface';
-import { MissingPersonsService } from '@modules/services/missing-persons.service';
+} from '@modules/details/details.interface';
+import { DetailsService } from '@modules/details/details.service';
 
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
@@ -34,7 +34,7 @@ import {
 
 export class DetailsComponent implements OnInit {
   private route = inject(ActivatedRoute);
-  private service = inject(MissingPersonsService);
+  private service = inject(DetailsService);
   dialog = inject(MatDialog);
 
   personId: string = '';
