@@ -5,9 +5,7 @@ import { DatePipe } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatButton } from '@angular/material/button';
 
-import {
-  IContent,
-} from '@modules/details/details.interface';
+import { IContent } from '@modules/home/home.interface';
 
 @Component({
   selector: 'card-component',

@@ -1,76 +1,76 @@
-<mat-card appearance="outlined">
-  <mat-card-header>
-    <mat-card-title-group>
-      <mat-card-title>{{ missingPersonDetails.nome }}</mat-card-title>
-      <mat-card-subtitle>
-        {{ missingPersonDetails.idade }} anos - {{ missingPersonDetails.sexo }}
-        <div class="text-center bg-orange-400 text-black font-bold text-xl p-2 rounded-lg my-2 w-80">
-          <p><strong>{{ daysMissing }} dias do desaparecimento</strong></p>
+<div class="flex flex-col max-w-3xl mx-auto my-10">
+  <mat-card appearance="outlined">
+    <mat-card-header>
+      <mat-card-title-group>
+        <mat-card-title>{{ missingPersonDetails.nome }}</mat-card-title>
+        <mat-card-subtitle>
+          {{ missingPersonDetails.idade }} anos
+          - {{ missingPersonDetails.sexo }}
+          <div
+            class="text-center bg-orange-400 text-black font-bold text-xl p-2 rounded-lg my-2 w-80">
+            <p><strong>{{ daysMissing }} dias do desaparecimento</strong></p>
+          </div>
+        </mat-card-subtitle>
+        @if (missingPersonDetails.urlFoto) {
+          <img
+            [src]="missingPersonDetails.urlFoto"
+            alt="Foto da pessoa desaparecida"
+            class="object-cover h-60 rounded-2xl"
+          >
+        } @else {
+          <img
+            src="/assets/img/unidentified-person.png"
+            alt="Foto da pessoa"
+            class="object-cover h-60 rounded-2xl"
+          >
+        }
+      </mat-card-title-group>
+    </mat-card-header>
+    <div class="flex justify-between mx-6 mb-6 gap-6">
+      <div class="flex flex-col flex-1 gap-2">
+        <h2 class="text-xl mb-2">Dados sobre o desaparecimento:</h2>
+        <p>
+          <strong>Local:</strong>
+          {{ missingPersonDetails.ultimaOcorrencia.localDesaparecimentoConcat }}
+        </p>
+        <p>
+          <strong>Data do desaparecimento:</strong>
+          {{
+            missingPersonDetails.ultimaOcorrencia.dtDesaparecimento
+              | date:'dd/MM/yyyy'
+          }}
+        </p>
+        <p class="mt-1">
+          <strong>Vestimentas:</strong>
+          {{
+            missingPersonDetails.ultimaOcorrencia.ocorrenciaEntrevDesapDTO.vestimentasDesaparecido &&
+            missingPersonDetails.ultimaOcorrencia.ocorrenciaEntrevDesapDTO.vestimentasDesaparecido.length > 0
+              ? missingPersonDetails.ultimaOcorrencia.ocorrenciaEntrevDesapDTO.vestimentasDesaparecido
+              : 'não há registro'
+          }}
+        </p>
+        <p>
+          <strong>Outras informações:</strong>
+          {{ missingPersonDetails.ultimaOcorrencia.ocorrenciaEntrevDesapDTO.informacao ?? 'não há registro' }}
+        </p>
+        <button mat-fab extended (click)="openDialogInformation()">
+          <mat-icon>info</mat-icon>
+          Vui ou tem informações dessa pessoa?
+        </button>
+      </div>
+      <div class="flex flex-col gap-4 justify-center">
+        <p class="text-2xl mt-2">Ajude compartilhando:</p>
+        <div class="flex flex-col gap-2">
+          <button mat-raised-button color="primary" (click)="shareOnWhatsApp()">
+            <mat-icon>share</mat-icon>
+            Compartilhar no WhatsApp
+          </button>
+          <button mat-raised-button color="accent" (click)="shareOnInstagram()">
+            <mat-icon>share</mat-icon>
+            Compartilhar no Instagram
+          </button>
         </div>
-      </mat-card-subtitle>
-      @if (missingPersonDetails.urlFoto) {
-        <img
-          mat-card-image
-          [src]="missingPersonDetails.urlFoto"
-          alt="Foto da pessoa desaparecida"
-          class="object-cover h-60"
-        >
-      } @else {
-        <img
-          mat-card-image
-          src="/assets/img/unidentified-person.jpg"
-          alt="Foto da pessoa"
-          class="object-cover h-60"
-          height="4000"
-          width="4000"
-        >
-      }
-    </mat-card-title-group>
-  </mat-card-header>
-
-  <mat-card-content>
-    <p class="text-xl">Dados dobre o desaparecimento:</p>
-  </mat-card-content>
-
-  <mat-card-content>
-    <p>
-      <strong>Local:</strong>
-      {{ missingPersonDetails.ultimaOcorrencia.localDesaparecimentoConcat }}
-    </p>
-    <p>
-      <strong>Data do desaparecimento:</strong>
-      {{
-        missingPersonDetails.ultimaOcorrencia.dtDesaparecimento
-          | date:'dd/MM/yyyy'
-      }}
-    </p>
-    <p>
-      <strong>Informações:</strong>
-      {{ missingPersonDetails.ultimaOcorrencia.ocorrenciaEntrevDesapDTO.informacao}}
-    </p>
-    <p>
-      <strong>Vestimentas:</strong>
-      {{ missingPersonDetails.ultimaOcorrencia.ocorrenciaEntrevDesapDTO.vestimentasDesaparecido}}
-    </p>
-  </mat-card-content>
-
-  <mat-card-actions align="start">
-    <button mat-fab extended (click)="openDialogInformation()">
-      <mat-icon>info</mat-icon> Vui ou tem informações dessa pessoa?
-    </button>
-  </mat-card-actions>
-
-  <mat-card-content>
-    <p class="text-2xl">Ajude compartilhando:</p>
-  </mat-card-content>
-  <mat-card-actions align="start">
-    <button mat-raised-button color="primary" (click)="shareOnWhatsApp()">
-      <mat-icon>share</mat-icon> Compartilhar no WhatsApp
-    </button>
-    <button mat-raised-button color="accent" (click)="shareOnInstagram()">
-      <mat-icon>share</mat-icon> Compartilhar no Instagram
-    </button>
-  </mat-card-actions>
-
-
-</mat-card>
+      </div>
+    </div>
+  </mat-card>
+</div>
