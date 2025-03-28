@@ -1,54 +1,46 @@
-<h2 mat-dialog-title>Formulário de informações</h2>
-<mat-dialog-content class="mat-typography">
-  <p>Desaparecido: {{ dialogData.nome }}</p>
-  <form [formGroup]="formInfo">
-    <div>
-      <mat-form-field appearance="outline">
+<div class="m-4">
+  <h2 mat-dialog-title>Formulário de informações</h2>
+  <mat-dialog-content class="mat-typography">
+    <p class="pb-4">Desaparecido: {{ dialogData.nome }}</p>
+    <form [formGroup]="formInfo">
+      <mat-form-field appearance="outline" class="w-full">
         <mat-label>Informe uma data</mat-label>
         <input
           matInput
           formControlName="data"
           [matDatepicker]="picker"
-          [disabled]="formInfo.invalid"
         >
-        <mat-datepicker-toggle
-          matIconSuffix
-          [for]="picker"
-        ></mat-datepicker-toggle>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"/>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
-    </div>
-    <div>
-      <mat-form-field appearance="outline" class="example-full-width">
+      <mat-form-field appearance="outline" class="w-full">
         <mat-label>Message</mat-label>
         <textarea
           matInput
           #message
           formControlName="informacao"
-          maxlength="256"
+          maxlength="255"
           placeholder="Digite sua mensagem"
         ></textarea>
-        <mat-hint align="end">{{ message.value.length }} / 256</mat-hint>
+        <mat-hint align="end">{{ message.value.length }} / 255</mat-hint>
       </mat-form-field>
-    </div>
-    <div>
       <input
         type="file"
         (change)="onFileSelected($event)"
         accept=".pdf,.jpg,.png"
         multiple
       >
-    </div>
-  </form>
-</mat-dialog-content>
-<mat-dialog-actions align="end">
-  <button mat-raised-button mat-dialog-close>Cancelar</button>
-  <button
-    mat-flat-button
-    [disabled]="formInfo.invalid"
-    [mat-dialog-close]="true"
-    (click)="sendFormInformation()"
-  >
-    Enviar
-  </button>
-</mat-dialog-actions>
+    </form>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-raised-button mat-dialog-close>Cancelar</button>
+    <button
+      mat-flat-button
+      [disabled]="formInfo.invalid"
+      [mat-dialog-close]="true"
+      (click)="sendFormInformation()"
+    >
+      Enviar
+    </button>
+  </mat-dialog-actions>
+</div>

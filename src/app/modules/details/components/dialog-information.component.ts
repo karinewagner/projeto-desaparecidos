@@ -4,17 +4,21 @@ import {
   FormBuilder,
   FormGroup,
   FormsModule,
-  ReactiveFormsModule, Validators
+  ReactiveFormsModule,
+  Validators
 } from '@angular/forms';
+
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatListModule } from '@angular/material/list';
 import { provideNativeDateAdapter } from '@angular/material/core';
+
 import { DetailsService } from '@modules/details/details.service';
-import { MatCardModule } from '@angular/material/card';
 import { ToastrService } from 'ngx-toastr';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'dialog-information-component',
@@ -26,11 +30,10 @@ import { ToastrService } from 'ngx-toastr';
     MatFormFieldModule,
     MatInputModule,
     MatDatepickerModule,
-    MatCardModule,
+    MatListModule,
+    MatIconModule,
   ],
-  providers: [
-    provideNativeDateAdapter(),
-  ],
+  providers: [provideNativeDateAdapter()],
   templateUrl: './dialog-information.component.html',
 })
 export class DialogInformationComponent implements OnInit {
@@ -40,7 +43,6 @@ export class DialogInformationComponent implements OnInit {
   readonly dialogData = inject(MAT_DIALOG_DATA);
 
   formInfo!: FormGroup;
-
   selectedFiles: File[] = [];
 
   ngOnInit() {
@@ -50,18 +52,23 @@ export class DialogInformationComponent implements OnInit {
       data: ['', Validators.required],
       id: [this.dialogData.id],
     });
-  };
+  }
 
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
+      // Limpar arquivos anteriores se necessário
       this.selectedFiles = Array.from(input.files);
     }
   }
 
+  removeFile(index: number): void {
+    this.selectedFiles.splice(index, 1);  // Remover arquivo da lista
+  }
+
   sendFormInformation() {
     if (this.formInfo.invalid) {
-      this.showErrorMessage();
+      this.toast.warning('Por gentileza, preeencha todos os campos obrigatórios.');
       return;
     }
 
@@ -76,20 +83,11 @@ export class DialogInformationComponent implements OnInit {
     this.service.postMoreInformation(formInfo, this.selectedFiles)
       .subscribe({
         next: res => {
-          this.showSuccessMessage();
-          console.log(res);
+          this.toast.success('Dados enviados com sucesso!');
         },
         error: err => {
           this.toast.error('Erro ao enviar dados: ' + err.message);
         },
       });
-  }
-
-  showErrorMessage() {
-    this.toast.warning('Por gentileza, preeencha todos os campos obrigatórios.');
-  }
-
-  showSuccessMessage() {
-    this.toast.success('Dados enviados com sucesso!');
   }
 }
