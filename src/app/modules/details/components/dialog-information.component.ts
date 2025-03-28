@@ -82,7 +82,7 @@ export class DialogInformationComponent implements OnInit {
 
     this.service.postMoreInformation(formInfo, this.selectedFiles)
       .subscribe({
-        next: res => {
+        next: () => {
           this.toast.success('Dados enviados com sucesso!');
         },
         error: err => {
