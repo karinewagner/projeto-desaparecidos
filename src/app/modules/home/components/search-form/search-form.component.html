@@ -1,16 +1,17 @@
 <form
   [formGroup]="form"
-  class="p-6 rounded-md shadow-md flex flex-col gap-2 bg-search-form"
+  class="p-2 sm:p-4 xl:p-8 rounded-md shadow-md flex flex-col bg-search-form"
 >
   <div class="flex flex-col">
-    <h2 class="text-2xl font-semibold text-center">
+    <h2 class="text-md md:text-xl lg:text-2xl font-semibold text-center">
       FAÇA SUA BUSCA
     </h2>
-    <span class="mb-2 text-xl text-center text-gray-500">
+    <span class="text-sm md:text-base lg:text-xl mb-2 text-center text-gray-500">
       Os dados abaixo ajudam a tornar sua busca mais específica!
     </span>
   </div>
-  <mat-form-field appearance="outline" class="w-full ">
+
+  <mat-form-field appearance="outline" class="w-full">
     <mat-label>Nome</mat-label>
     <input
       matInput
@@ -20,10 +21,10 @@
     >
   </mat-form-field>
 
-  <div class="flex gap-4">
+  <div class="flex flex-col lg:flex-row lg:gap-4">
     <div class="flex-1">
       <p class="font-semibold mb-2">Faixa Etária</p>
-      <div class="flex gap-3">
+      <div class="flex gap-1 md:gap-2 lg:gap-3">
         <mat-form-field appearance="outline" class="w-full">
           <mat-label>Mínima</mat-label>
           <input
@@ -49,18 +50,17 @@
       </div>
     </div>
 
-    <div class="flex flex-1 ">
+    <div class="flex flex-1 md:gap-2 flex-col sm:flex-row">
       <div class="flex-1">
-        <p class="font-semibold mb-4">Sexo</p>
-        <mat-radio-group formControlName="sexo" class="flex gap-1">
+        <p class="font-semibold lg:mb-4">Sexo</p>
+        <mat-radio-group formControlName="sexo" class="flex md:gap-2">
           <mat-radio-button value="MASCULINO">Masculino</mat-radio-button>
           <mat-radio-button value="FEMININO">Feminino</mat-radio-button>
         </mat-radio-group>
       </div>
-
       <div class="flex-1">
-        <p class="font-semibold mb-4">Status</p>
-        <mat-radio-group formControlName="status" class="flex gap-1">
+        <p class="font-semibold lg:mb-4">Status</p>
+        <mat-radio-group formControlName="status" class="flex md:gap-2">
           <mat-radio-button value="DESAPARECIDO">Desaparecido</mat-radio-button>
           <mat-radio-button value="LOCALIZADO">Localizado</mat-radio-button>
         </mat-radio-group>
@@ -68,12 +68,22 @@
     </div>
   </div>
 
-  <div class="flex gap-2 justify-center">
-    <button mat-raised-button color="warn" (click)="clearFilter()">
+  <div class="flex gap-1 my-2 md:gap-2 lg:gap-4 justify-center">
+    <button
+      mat-raised-button
+      color="warn"
+      (click)="clearFilter()"
+      class="sm:w-1/5 lg:w-1/6"
+    >
       <mat-icon>close</mat-icon>
       Limpar
     </button>
-    <button mat-flat-button color="primary" (click)="sendOutputFilters()">
+    <button
+      mat-flat-button
+      color="primary"
+      (click)="sendOutputFilters()"
+      class="sm:w-1/5 lg:w-1/6"
+    >
       <mat-icon>search</mat-icon>
       Buscar
     </button>

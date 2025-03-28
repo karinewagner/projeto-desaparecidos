@@ -1,15 +1,20 @@
-<div class="flex flex-col max-w-7xl mx-auto">
+<div
+  class="flex flex-col max-w-7xl mx-auto gap-2 min-[425px]:px-2 sm:gap-4 lg:gap-6"
+>
   <search-form-component (outputFilters)="receiveOutputFilters($event)"/>
 
-  <div class="w-full mt-5">
-    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+  <div class="w-full">
+    <div
+      class="grid grid-cols-1 min-[425px]:grid-cols-2 sm:grid-cols-3
+      md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-4 lg:gap-6"
+    >
       @for (missingPerson of missingPersonList; track missingPerson.id) {
         <card-component [missingPerson]="missingPerson" />
       }
     </div>
   </div>
 
-  <div class="flex justify-center rounded-md shadow-md my-4 bg-search-form">
+  <div class="flex justify-center rounded-md shadow-md bg-search-form min-[425px]:px-2">
     <mat-paginator
       #paginator
       (page)="handlePageEvent($event)"
