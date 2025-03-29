@@ -42,6 +42,8 @@ export class DialogInformationComponent implements OnInit {
   private service = inject(DetailsService);
   readonly dialogData = inject(MAT_DIALOG_DATA);
 
+  isLoading: boolean = false;
+
   formInfo!: FormGroup;
   selectedFiles: File[] = [];
 
@@ -67,6 +69,7 @@ export class DialogInformationComponent implements OnInit {
 
   sendFormInformation() {
     if (this.formInfo.invalid) {
+
       this.toast.warning('Por gentileza, preeencha todos os campos obrigatórios.');
       return;
     }
@@ -79,13 +82,17 @@ export class DialogInformationComponent implements OnInit {
       data: formattedDate,
     };
 
+    this.isLoading = true;
+
     this.service.postMoreInformation(formInfo, this.selectedFiles)
       .subscribe({
         next: () => {
           this.toast.success('Dados enviados com sucesso!');
+          this.isLoading = false;
         },
         error: err => {
           this.toast.error('Erro ao enviar dados: ' + err.message);
+          this.isLoading = false;
         },
       });
   }

@@ -78,7 +78,7 @@
     <button mat-raised-button mat-dialog-close>Cancelar</button>
     <button
       mat-flat-button
-      [disabled]="formInfo.invalid"
+      [disabled]="formInfo.invalid || isLoading"
       [mat-dialog-close]="true"
       (click)="sendFormInformation()"
     >
