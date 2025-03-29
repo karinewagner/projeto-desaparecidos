@@ -57,13 +57,12 @@ export class DialogInformationComponent implements OnInit {
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
-      // Limpar arquivos anteriores se necessário
-      this.selectedFiles = Array.from(input.files);
+      this.selectedFiles = [...this.selectedFiles, ...input.files];
     }
   }
 
   removeFile(index: number): void {
-    this.selectedFiles.splice(index, 1);  // Remover arquivo da lista
+    this.selectedFiles.splice(index, 1);
   }
 
   sendFormInformation() {

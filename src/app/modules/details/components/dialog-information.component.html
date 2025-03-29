@@ -24,12 +24,54 @@
         ></textarea>
         <mat-hint align="end">{{ message.value.length }} / 255</mat-hint>
       </mat-form-field>
-      <input
-        type="file"
-        (change)="onFileSelected($event)"
-        accept=".pdf,.jpg,.png"
-        multiple
-      >
+      @if (selectedFiles.length) {
+        <div class="overflow-hidden flex flex-col gap-1 my-2">
+          @for (file of selectedFiles; track file; let i = $index) {
+            <div
+              class="flex justify-between py-1 px-2 border border-gray-300 rounded-xl shadow-sm">
+              <div class="flex flex-col w-full truncate">
+                <p class="font-semibold text-xs truncate">
+                  {{ file.name }}
+                </p>
+                <span class="text-xs text-gray-600">
+                {{ file.size }}
+              </span>
+              </div>
+              <button class="text-red-500 hover:cursor-pointer hover:text-red-600"
+                      (click)="removeFile(i)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          }
+        </div>
+      } @else {
+        <div class="flex flex-col justify-center items-center bg-gray-100
+        border border-gray-300 p-2 rounded-xl my-2 text-[10px] sm:text-base">
+          <mat-icon>warning</mat-icon>
+          <p>
+            Você não adicionou nenhum anexo.
+          </p>
+        </div>
+      }
+      <div class="relative w-full text-[10px] ">
+        <input
+          type="file"
+          id="fileUpload"
+          (change)="onFileSelected($event)"
+          accept=".pdf,.jpg,.png"
+          multiple
+          class="hidden"
+        >
+        <label
+          for="fileUpload"
+          class="cursor-pointer bg-blue-700 text-white py-2 px-4 rounded-lg
+          hover:bg-blue-800 transition inline-block w-full text-center"
+        >
+          <div class="flex justify-center items-center gap-1">
+            <mat-icon>library_add</mat-icon> <span>Selecione um ou mais arquivos</span>
+          </div>
+        </label>
+      </div>
     </form>
   </mat-dialog-content>
   <mat-dialog-actions align="end">
