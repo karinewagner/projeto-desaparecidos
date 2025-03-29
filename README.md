@@ -1,59 +1,77 @@
-# ProjetoDesaparecidos
+# Projeto Desaparecidos
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.4.
+![Badge](https://img.shields.io/badge/Status-Desenvolvimento%20Concluído-green) ![License](https://img.shields.io/badge/License-MIT-blue)
 
-## Development server
+Este projeto foi desenvolvido como parte de um processo seletivo para a vaga de Desenvolvedor Front-End, realizado pelo SEPLAG em 2025. Ele consiste em uma aplicação web para consulta de pessoas desaparecidas, utilizando dados da API da Polícia Judiciária Civil de Mato Grosso.
 
-To start a local development server, run:
+## 🚀 Tecnologias Utilizadas
 
+- **Angular 19.2.4** - Framework principal para desenvolvimento da aplicação.
+- **Tailwind CSS** - Para estilização responsiva e moderna.
+- **HttpClient do Angular** - Para requisições HTTP e consumo da API.
+- **Lazy Loading Routes** - Para carregamento eficiente das páginas.
+- **Docker** - Para empacotamento da aplicação em um container isolado.
+
+## 📌 Funcionalidades
+
+### 1️⃣ Tela Inicial
+- 📌 Exibe uma lista de pessoas desaparecidas ou localizadas em forma de cards.
+- 📷 Cada card contém a imagem e informações básicas sobre o caso.
+- 🔄 Implementação de paginação para exibir pelo menos 10 registros por vez.
+- 🔍 Barra de pesquisa para filtrar os resultados com base nos parâmetros da API.
+
+### 2️⃣ Tela de Detalhamento
+- 🔗 Ao clicar no botão de mais detalhes em um card, o usuário é redirecionado para a tela de detalhes do desaparecido.
+- 📝 Exibe informações adicionais sobre a pessoa.
+- 🎨 Destaque visual para a situação do desaparecido (desaparecido/localizado).
+
+### 3️⃣ Tela de Inclusão de Informações
+- 📨 Permite ao cidadão enviar informações sobre uma pessoa desaparecida.
+- 🔢 Implementação de máscaras de formatação para entrada de dados.
+- 🖼 Upload de fotografias.
+
+## 🛠 Instalação e Execução
+
+### ⚡ Pré-requisitos
+Certifique-se de ter instalado:
+- [Node.js](https://nodejs.org/)
+- [Angular CLI](https://angular.dev/tools/cli)
+- [Docker](https://www.docker.com/)
+
+### 🔧 Rodando o projeto localmente
+
+1️⃣ Clone o repositório:
+```bash
+git clone https://github.com/seu-usuario/ProjetoDesaparecidos.git
+```
+2️⃣ Acesse o diretório do projeto:
+```bash
+cd ProjetoDesaparecidos
+```
+3️⃣ Instale as dependências:
+```bash
+npm install
+```
+4️⃣ Inicie o servidor de desenvolvimento:
 ```bash
 ng serve
 ```
-
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
+5️⃣ Acesse no navegador:
 ```bash
-ng generate component component-name
+http://localhost:4200/
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
+### 🐳 Rodando com Docker
+1️⃣ Construa a imagem Docker:
 ```bash
-ng generate --help
+docker build -t projeto-desaparecidos .
 ```
 
-## Building
-
-To build the project run:
-
+2️⃣ Execute o container:
 ```bash
-ng build
+docker run -p 4200:4200 projeto-desaparecidos
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+📬 Contato
 
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Para dúvidas ou sugestões, entre em contato pelo e-mail: [karinedwagner@gmail.com](mailto:karinedwagner@gmail.com)
