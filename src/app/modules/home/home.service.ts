@@ -14,7 +14,11 @@ export class HomeService {
   private _httpClient = inject(HttpClient);
 
   getMissingPersonList(params: IMissingPersonList): Observable<IMissingPersonListResponse> {
-    const httpParams = new HttpParams({ fromObject: {...params} });
+    const newParams = Object.fromEntries(
+      Object.entries(params).filter(([_, value]) => value !== null)
+    );
+
+    const httpParams = new HttpParams({ fromObject: {...newParams} });
 
     return this._httpClient
       .get<IMissingPersonListResponse>(`${environment.apiUrl}/v1/pessoas/aberto/filtro`, {
