@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { DatePipe } from '@angular/common';
 
 import {
@@ -28,6 +28,7 @@ import {
     MatIconModule,
     MatButtonModule,
     DatePipe,
+    RouterLink,
   ],
   templateUrl: './details.component.html',
 })

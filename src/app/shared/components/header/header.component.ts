@@ -3,10 +3,13 @@ import { Component, inject, OnInit } from '@angular/core';
 import { HeaderService } from './header.service';
 import { IStatisticsData } from './header.interface';
 import { ToastrService } from 'ngx-toastr';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'header-component',
-  imports: [],
+  imports: [
+    RouterLink
+  ],
   templateUrl: './header.component.html',
 })
 

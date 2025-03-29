@@ -50,9 +50,10 @@ export class DialogInformationComponent implements OnInit {
   ngOnInit() {
     this.formInfo = this._fb.group({
       ocoId: [this.dialogData.ultimaOcorrencia.ocoId],
+      ocorrenciaId: [this.dialogData.ultimaOcorrencia.ocoId],
       informacao: ['', Validators.required],
       data: ['', Validators.required],
-      id: [this.dialogData.id],
+      descricao: [''],
     });
   }
 
