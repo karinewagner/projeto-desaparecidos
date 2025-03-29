@@ -94,26 +94,14 @@ export class DetailsComponent implements OnInit {
   shareOnWhatsApp() {
     const mensagem = encodeURIComponent(
       `🚨 DESAPARECIDO 🚨\n\n
-      👤 Nome: ${this.missingPersonDetails.nome}\n
-      📍Última localização: ${this.missingPersonDetails.ultimaOcorrencia.localDesaparecimentoConcat}\n
-      📅 Desaparecido desde: ${new Date(this.missingPersonDetails.ultimaOcorrencia.dtDesaparecimento).toLocaleDateString()}\n
-      👕 Vestimentas: ${this.missingPersonDetails.ultimaOcorrencia.ocorrenciaEntrevDesapDTO.vestimentasDesaparecido}\n
-      📢 Ajude a encontrar! Compartilhe!\n
-      🔗 ${this.missingPersonDetails.urlFoto}`
+      Nome: ${this.missingPersonDetails.nome}\n
+      Última localização: ${this.missingPersonDetails.ultimaOcorrencia.localDesaparecimentoConcat}\n
+      Desaparecido desde: ${new Date(this.missingPersonDetails.ultimaOcorrencia.dtDesaparecimento).toLocaleDateString()}\n
+      Vestimentas: ${this.missingPersonDetails.ultimaOcorrencia.ocorrenciaEntrevDesapDTO.vestimentasDesaparecido}\n
+      Ajude a encontrar! Compartilhe!\n
+      `
     );
 
     window.open(`https://wa.me/?text=${mensagem}`, '_blank');
-  }
-
-  shareOnInstagram() {
-    const mensagem =
-      `🚨 DESAPARECIDO 🚨\n\n
-      👤 Nome: ${this.missingPersonDetails.nome}\n
-      📍 Última localização: ${this.missingPersonDetails.ultimaOcorrencia.localDesaparecimentoConcat}\n
-      📅 Desaparecido desde: ${new Date(this.missingPersonDetails.ultimaOcorrencia.dtDesaparecimento).toLocaleDateString()}\n
-      👕 Vestimentas: ${this.missingPersonDetails.ultimaOcorrencia.ocorrenciaEntrevDesapDTO.vestimentasDesaparecido}\n
-      📢 Ajude a encontrar! Compartilhe!`;
-
-    alert('Copie esta mensagem e compartilhe no Instagram:\n\n' + mensagem);
   }
 }
