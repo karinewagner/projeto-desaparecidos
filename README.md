@@ -59,20 +59,28 @@ npm install
 ng serve
 ```
 5️⃣ Acesse no navegador:
-```bash
+
 http://localhost:4200/
-```
+
 
 ### 🐳 Rodando com Docker
 1️⃣ Construa a imagem Docker:
 ```bash
-docker build -t projeto-desaparecidos .
+docker build -t karine-projeto-desaparecidos .
 ```
 
 2️⃣ Execute o container:
 ```bash
-docker run -p 4200:4200 projeto-desaparecidos
+docker run -p 8080:80 karine-projeto-desaparecidos
 ```
+
+3️⃣ Acesse no navegador:
+
+http://localhost:8080/
+
+
+[//]: # (### 🐳 Rodando a imagem do DockerHub)
+
 
 📬 Contato
 
