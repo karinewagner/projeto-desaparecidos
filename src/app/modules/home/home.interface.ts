@@ -56,7 +56,7 @@ export interface IMissingPersonList {
   nome?: string,
   faixaIdadeInicial?: number,
   faixaIdadeFinal?: number,
-  sexo?: 'MASCULINO' | 'FEMININO',
+  sexo?: 'MASCULINO' | 'FEMININO' | '',
   status?: 'DESAPARECIDO' | 'LOCALIZADO',
   pagina: number,
   porPagina: number

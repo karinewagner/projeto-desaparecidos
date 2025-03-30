@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 
 import { MatCardModule } from '@angular/material/card';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
@@ -11,6 +11,7 @@ import {
   SearchFormComponent
 } from '@modules/home/components/search-form/search-form.component';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'home-component',
@@ -23,7 +24,7 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './home.component.html',
 })
 
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   private service = inject(HomeService);
   private toast = inject(ToastrService);
 
@@ -36,12 +37,12 @@ export class HomeComponent implements OnInit {
 
   pageEvent!: PageEvent;
 
+  cacheSubscription!: Subscription;
+
   ngOnInit() {
-    this.getMissingPersonList({
-      pagina: this.pageIndex,
-      porPagina: this.pageSize,
-      status: 'DESAPARECIDO',
-    });
+    this.cacheSubscription = this.service.cacheSearch$.subscribe(
+      res => this.getMissingPersonList(res)
+    )
   }
 
   getMissingPersonList(params: IMissingPersonList) {
@@ -58,10 +59,14 @@ export class HomeComponent implements OnInit {
 
   handlePageEvent(e: PageEvent) {
     this.pageEvent = e;
-    this.getMissingPersonList({
+
+    this.service.cacheSearch$ = {
+      ...this.service.cacheSearch,
       pagina: e.pageIndex,
       porPagina: e.pageSize,
-    });
+    };
+
+    this.getMissingPersonList(this.service.cacheSearch);
   }
 
   receiveOutputFilters(
@@ -71,5 +76,9 @@ export class HomeComponent implements OnInit {
       pagina: 0,
       porPagina: this.pageSize,
     });
+  }
+
+  ngOnDestroy() {
+    this.cacheSubscription.unsubscribe();
   }
 }
