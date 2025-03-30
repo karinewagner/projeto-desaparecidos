@@ -21,6 +21,5 @@ body {
 
 .bg-search-form {
   background: rgb(249,249,249);
-  background: radial-gradient(circle, rgba(249,249,249,1) 93%, rgba(180,202,227,1) 100%);
 }
 

@@ -12,14 +12,16 @@ import {
 } from '@modules/home/components/search-form/search-form.component';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'home-component',
   imports: [
     MatCardModule,
     MatPaginatorModule,
+    MatProgressSpinnerModule,
     CardComponent,
-    SearchFormComponent,
+    SearchFormComponent
   ],
   templateUrl: './home.component.html',
 })
@@ -28,6 +30,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   private service = inject(HomeService);
   private toast = inject(ToastrService);
 
+  isLoading: boolean = false;
   missingPersonList: IContent[] = [];
 
   length!: number;
@@ -46,14 +49,20 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   getMissingPersonList(params: IMissingPersonList) {
+    this.isLoading = true;
+
     this.service.getMissingPersonList(params).subscribe({
       next: res => {
         this.missingPersonList = res.content;
         this.length = res.totalElements;
         this.pageIndex = res.pageable.pageNumber;
+        this.scrollToList();
+        this.isLoading = false;
       },
-      error: err =>
-        this.toast.error('Erro ao buscar dados: ' + err.message),
+      error: err => {
+        this.toast.error('Erro ao buscar dados: ' + err.message);
+        this.isLoading = false;
+      }
     });
   }
 
@@ -76,6 +85,12 @@ export class HomeComponent implements OnInit, OnDestroy {
       pagina: 0,
       porPagina: this.pageSize,
     });
+  }
+
+  scrollToList() {
+    const listSection = document.getElementById('list');
+    if (listSection)
+      listSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
   ngOnDestroy() {

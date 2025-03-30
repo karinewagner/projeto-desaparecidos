@@ -17,6 +17,8 @@ import { MatDialog } from '@angular/material/dialog';
 import {
   DialogInformationComponent
 } from '@modules/details/components/dialog-information.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'details-component',
@@ -27,6 +29,7 @@ import {
     MatChipsModule,
     MatIconModule,
     MatButtonModule,
+    MatProgressSpinnerModule,
     DatePipe,
     RouterLink,
   ],
@@ -36,8 +39,10 @@ import {
 export class DetailsComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private service = inject(DetailsService);
+  private toast = inject(ToastrService);
   dialog = inject(MatDialog);
 
+  isLoading: boolean = false;
   personId: string = '';
   daysMissing: number = 0;
   missingPersonDetails: IMissingPersonByIdResponse = {
@@ -69,12 +74,18 @@ export class DetailsComponent implements OnInit {
   }
 
   getMissingPersonDetailsById(id: string) {
-    this.service.getMissingPersonDetailsById(id).subscribe(
-      res => {
+    this.isLoading = true;
+    this.service.getMissingPersonDetailsById(id).subscribe({
+      next: res => {
         this.missingPersonDetails = res;
         this.calculateDaysMissing();
+        this.isLoading = false;
+      },
+      error: err => {
+        this.toast.error('Erro ao buscar dados: ' + err.message);
+        this.isLoading = false;
       }
-    );
+    });
   }
 
   calculateDaysMissing() {
@@ -89,7 +100,7 @@ export class DetailsComponent implements OnInit {
   openDialogInformation(): void {
     this.dialog.open(DialogInformationComponent, {
       data: this.missingPersonDetails,
-    })
+    });
   }
 
   shareOnWhatsApp() {
