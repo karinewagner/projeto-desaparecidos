@@ -4,7 +4,7 @@
 
 Este projeto foi desenvolvido como parte de um processo seletivo para a vaga de Desenvolvedor Front-End, realizado pelo SEPLAG em 2025. Ele consiste em uma aplicação web para consulta de pessoas desaparecidas, utilizando dados da API da Polícia Judiciária Civil de Mato Grosso.
 
-#### 🔗 Link para vialuzação do projeto: https://projeto-desaparecidos.netlify.app/
+#### 🔗 Link para visualização do projeto: https://projeto-desaparecidos.netlify.app/
 
 ## 🚀 Tecnologias Utilizadas
 
