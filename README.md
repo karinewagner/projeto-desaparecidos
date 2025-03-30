@@ -44,11 +44,11 @@ Certifique-se de ter instalado:
 
 1️⃣ Clone o repositório:
 ```bash
-git clone https://github.com/seu-usuario/ProjetoDesaparecidos.git
+git clone https://github.com/karinewagner/projeto-desaparecidos.git
 ```
 2️⃣ Acesse o diretório do projeto:
 ```bash
-cd ProjetoDesaparecidos
+cd projeto-desaparecidos
 ```
 3️⃣ Instale as dependências:
 ```bash
